@@ -16,8 +16,8 @@
 <body>
 
 <div class="jumbotron text-center banner--img" style="margin-bottom:0">
-  <h1>My Bank</h1>
-  <p>최첨단 은행관리 시스템</p> 
+  <h1 style="color:white;">JinnyBank</h1>
+  <p style="color:white; font-weight: bold;">최첨단 은행관리 시스템</p> 
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
