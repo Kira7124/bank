@@ -4,4 +4,4 @@
 Spring boot , jsp Servlet , Mysql, java ,js 활용계획<br>
 --> 1. Spring Security 활용한 접근제한 세팅 , 암호화구현목표<br>
 --> 2. jwt 토큰 발행으로 보안성강화목표 <br>
---> 3. db 트렌젝션 개념 활용으로 거래 무결성확보 목표
+--> 3. db 트렌젝션 개념 활용으로 출금,송금 db활용과정 무결성확보 목표
