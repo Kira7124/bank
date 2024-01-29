@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tenco.bank.dto.SignUpFormDto;
 import com.tenco.bank.repository.entity.User;
 
 //interface + xml 연결 ( mapper framework 규칙 )
@@ -12,7 +13,7 @@ public interface UserRepository {
 	
 	
 	// 회원가입
-	public int insert(User user);
+	public int insert(SignUpFormDto user);
 	
 	// 회원수정
 	public int updateById(User user);
