@@ -25,7 +25,7 @@
 			    <input type="text" name="fullname" class="form-control" placeholder="Enter username" id="fullname">
 			  </div>
 		   <!-- 이벤트 전파속성 -> 버블링? 캡처링? 뭔가 -->	  
-           <button type="submit" class="btn btn-primary">회원가입</button>
+           <button type="submit" class="btn btn-info">회원가입</button>
          </form>
 	  </div>
 	 <br>

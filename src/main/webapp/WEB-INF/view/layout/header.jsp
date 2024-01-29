@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- 외부 스타일시트 가져오기 -->
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body>
 
@@ -57,12 +58,10 @@
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
       <div class="m--profile"></div>
-      <p>중단기 심화 - 은행 관리 시스템 예제</p>
-      <h3>Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
+      <p><span style="font-weight: bold;">Welcome to the Jinny's Bank</span></p>
+      <h3>TODO LIST</h3>
+      <p>Please select the menu that you want to do.</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
           <a class="nav-link active" href="#">계좌생성</a>
