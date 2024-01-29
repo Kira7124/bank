@@ -24,7 +24,7 @@ public interface AccountRepository {
 	public List<Account> findAllByUserId();
 	
 	// 하나의 계좌 조회
-	public Account findById(Integer id);
+	public Account findByNumber(Integer number);
 	
 	
 	
