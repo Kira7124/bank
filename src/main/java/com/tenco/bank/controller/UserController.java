@@ -13,6 +13,7 @@ import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.repository.entity.User;
 import com.tenco.bank.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -132,9 +133,12 @@ public class UserController {
 	
 	
 	
-	
-	
-	
+	@GetMapping("/sign-out")
+	public String userlogout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/user/sign-in";
+	}
 	
 	
 	
