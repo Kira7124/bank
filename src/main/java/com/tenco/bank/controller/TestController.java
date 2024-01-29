@@ -33,7 +33,6 @@ public class TestController {
 	  
 	 
 	 
-	 
 	// 예외 발생 (일부로 throw new ~ 를 해준거고 사실은 따로 처리해야함 )
 	//throw new CustomRestfulException("페이지를 찾을 수 없습니다!", HttpStatus.NOT_FOUND);
 	return "layout/main";

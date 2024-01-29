@@ -25,8 +25,8 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	// implementation 'javax.servlet:jstl' 사용 안됨
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
-	//implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
-
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
