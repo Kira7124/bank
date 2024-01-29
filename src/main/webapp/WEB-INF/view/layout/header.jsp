@@ -31,10 +31,10 @@
         <a class="nav-link" href="#">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">SignIn</a>
+        <a class="nav-link" href="/user/sign-in">SignIn</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">SignUp</a>
+        <a class="nav-link" href="/user/sign-up">SignUp</a>
       </li>    
     </ul>
   </div>  

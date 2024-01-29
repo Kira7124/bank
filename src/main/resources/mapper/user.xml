@@ -29,6 +29,18 @@
 		select * from user_tb	
 	</select>
 
+
+	<select id="findByUsername" resultType="com.tenco.bank.repository.entity.User">
+		select*from user_tb where username=#{username}
+	</select>
+	
+	
+	<select id="findByUsernameAndPassword" resultType="com.tenco.bank.repository.entity.User">
+		select*from user_tb where username=#{username} and password=#{password}
+	</select>
+	
+	
+	
 	
 
 </mapper>
