@@ -19,13 +19,11 @@
 		delete from account_tb where id = #{id}
 	</delete>
 	
-	<select id="findAllByUserId" resultType="com.tenco.bank.repository.entity.Account">
-		select * from account_tb 
-	</select>
 	
-	<select id="findByUserId" resultType="com.tenco.bank.repository.entity.Account">
+	<select id="findAllByUserId" resultType="com.tenco.bank.repository.entity.Account">
 		select * from account_tb where user_id = #{userId} 
 	</select>
+	
 	
 	<select id="findByNumber"  resultType="com.tenco.bank.repository.entity.Account">
 		select * from account_tb where number = #{number}

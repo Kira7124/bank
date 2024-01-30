@@ -1,8 +1,12 @@
 package com.tenco.bank.controller;
 
+import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.tenco.bank.dto.AccountSaveFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
+import com.tenco.bank.repository.entity.Account;
 import com.tenco.bank.repository.entity.User;
 import com.tenco.bank.service.AccountService;
 import com.tenco.bank.utils.Define;
@@ -107,7 +112,33 @@ public class AccountController {
 		
 	}
 	
+	//계좌 목록 보기페이지 생성
+	//주소설계
+	// http://localhost:80/account/list
+	// http://localhost:80/accoutn/
 	
+	
+	@GetMapping({"/list","/"})
+	public String listPage(Model model) {
+		
+		// 1.인증검사
+		User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		if(principal == null) {
+			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
+		}
+		
+		
+		// ++ 경우의 수 -> 있거나 없거나 둘 중 한개 설정 (model) 
+		List<Account> accountList = accountService.readAccountListByUserId(principal.getId());
+		
+		if(accountList.isEmpty()) {
+			model.addAttribute("accountList", null);
+		}else {
+			model.addAttribute("accountList", accountList);
+		}
+		
+		return "account/list";
+	}
 	
 	
 	

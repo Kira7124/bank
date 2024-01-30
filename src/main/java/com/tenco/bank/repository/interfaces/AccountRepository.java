@@ -21,7 +21,7 @@ public interface AccountRepository {
 	public int deleteById(Integer id);
 	
 	// 계좌조회 - 1 유저 , N 계좌 (여러개)
-	public List<Account> findAllByUserId();
+	public List<Account> findAllByUserId(Integer userId);
 	
 	// 하나의 계좌 조회
 	public Account findByNumber(String number);
