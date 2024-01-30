@@ -96,8 +96,11 @@ public class UserController {
 	
 	
 	@GetMapping("/sign-in")
-	public String signInpage() {
+	public String signInpage(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
 		return "user/signIn";
+		
 	}
 	
 	
