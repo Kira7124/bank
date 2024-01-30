@@ -65,6 +65,31 @@ public class UserService {
 		
 	}
 	
+	
+	
+	
+	
+	
+	@Transactional
+	public User detailUser(SignUpFormDto dto) {
+		
+		User user = User.builder()
+				.username(dto.getUsername())
+				.password(dto.getPassword())
+				.build();
+		
+		User userEntity = userRepository.findByUsername(user);
+		
+		return userEntity;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * 로그인 처리

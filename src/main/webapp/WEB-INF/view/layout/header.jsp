@@ -37,6 +37,9 @@
       
      <c:choose>
         <c:when test="${principal != null}">
+          <li class="nav-item">
+	    	 <a class="nav-link" href="/user/detail-user?username=${principal.username}">마이페이지</a>
+	      </li>
 	      <li class="nav-item">
 	    	 <a class="nav-link" href="/user/sign-out">로그아웃</a>
 	      </li>
