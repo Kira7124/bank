@@ -102,7 +102,6 @@ public class UserController {
 	
 	
 	/**
-	 * 
 	 * 로그인요청 처리
 	 * @param SignInFormDto
 	 * @return 추후 account/list 페이지로 이동예정
@@ -129,7 +128,7 @@ public class UserController {
 		httpSession.setAttribute("name", user.getUsername());
 		//로그인 완료 --> 페이지 결정 (account/list)
 		// todo 수정예정 (현재 접근 경로없음)
-		return "redirect:/user/sign-in";
+		return "redirect:/account/list";
 	}
 	
 	

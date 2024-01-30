@@ -67,6 +67,13 @@ public class AccountController {
 	}
 	
 	
+	/**
+	 * 계좌생성 처리
+	 * @param dto
+	 * @return list.jsp
+	 */
+	
+	
 	
 	@PostMapping("/save")
 	public String savePagePost(AccountSaveFormDto dto) {
@@ -108,7 +115,7 @@ public class AccountController {
 		// todo -> 수정예정...
 		
 		accountService.createAccount(dto, principal.getId());
-		return "redirect:/user/sign-in";
+		return "redirect:/account/list";
 		
 	}
 	
@@ -116,6 +123,14 @@ public class AccountController {
 	//주소설계
 	// http://localhost:80/account/list
 	// http://localhost:80/accoutn/
+	
+	
+	
+	/**
+	 * 계좌목록페이지호출
+	 * @param model - accountList
+	 * @return list.jsp
+	 */
 	
 	
 	@GetMapping({"/list","/"})

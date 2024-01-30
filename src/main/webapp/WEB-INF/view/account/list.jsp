@@ -16,7 +16,7 @@
 	  <!-- 만약 accountList null or not null -->
 <c:choose>
 	  <c:when test="${accountList != null}">
-	  	<table class="table">
+	  	<table class="table table-bordered table-sm">
 			<thead>
 				<tr>
 					<th>계좌번호</th>
