@@ -12,6 +12,7 @@ import com.tenco.bank.dto.SignUpFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.repository.entity.User;
 import com.tenco.bank.service.UserService;
+import com.tenco.bank.utils.Define;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -124,7 +125,7 @@ public class UserController {
 		// 서비스 호출 예정....
 		User user =	userService.readUser(dto);
 		System.out.println("22222222222222222222222222");
-		httpSession.setAttribute("principal", user);
+		httpSession.setAttribute(Define.PRINCIPAL, user);
 		httpSession.setAttribute("name", user.getUsername());
 		//로그인 완료 --> 페이지 결정 (account/list)
 		// todo 수정예정 (현재 접근 경로없음)
