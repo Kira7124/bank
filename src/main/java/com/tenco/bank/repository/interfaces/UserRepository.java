@@ -18,7 +18,7 @@ public interface UserRepository {
 	public int updateById(User user);
 	
 	// 회원삭제
-	public int deleteById(Integer id);
+	public int deleteById(User user);
 	
 	//회원조회 --> User 타입쓰는이유? -> 단일행으로 쿼리가 떨어지기때문!
 	public User findById(Integer id); // 관리자에서 활용가능!
@@ -31,6 +31,7 @@ public interface UserRepository {
 	
 	// 아이디 , 비밀번호로 회원조회 -> 로그인처리
 	public User findByUsernameAndPassword(User user);
+	
 	
 	
 	

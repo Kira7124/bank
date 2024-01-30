@@ -18,7 +18,7 @@
 	</update>
 	
 	<delete id="deleteById">
-		delete from user_tb where id = #{id}
+		delete from user_tb where username = #{username} and password =#{password}
 	</delete>
 	
 	<select id="findById" resultType="com.tenco.bank.repository.entity.User">
@@ -40,6 +40,7 @@
 	</select>
 	
 	
+
 	
 	
 

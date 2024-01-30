@@ -33,6 +33,7 @@ public class UserController {
 	// 화면반환용도
 	// http://localhost:80/user/sign-up
 	
+	
 	/**
 	 * 회원가입페이지요청
 	 * @return signUp.jsp 파일 리턴
@@ -140,6 +141,45 @@ public class UserController {
 		return "redirect:/user/sign-in";
 	}
 	
+	
+	
+	
+	@GetMapping("/delete-user")
+	public String userDeleteget() {
+		return "user/delete";
+	}
+	
+	
+	
+	@PostMapping("/delete-user")
+	public String userDeletepost(SignUpFormDto dto,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String Username = (String)session.getAttribute("name");
+		
+		
+		
+		if(dto.getUsername() == null || dto.getUsername().isEmpty()) {
+			throw new CustomRestfulException("username을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		if(dto.getPassword() == null || dto.getPassword().isEmpty()) {
+			throw new CustomRestfulException("password을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		 if (dto.getUsername().equals(Username)) {
+		        userService.deleteUser(dto);
+		        session.invalidate();
+		 } 
+		
+		 
+		 if(!dto.getUsername().equals(Username)) {
+			 throw new CustomRestfulException("본인 username을 입력하세요!", HttpStatus.BAD_REQUEST);
+		 }
+		 
+		 
+		return "redirect:/user/sign-in";
+	}
 	
 	
 	

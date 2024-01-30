@@ -48,6 +48,23 @@ public class UserService {
 	
 	
 	
+	
+	@Transactional
+	public void deleteUser(SignUpFormDto dto) {
+		
+		User user = User.builder()
+				.username(dto.getUsername())
+				.password(dto.getPassword())
+				.build();
+		int result = userRepository.deleteById(user);
+		
+		
+		if(result != 1) {
+			throw new CustomRestfulException("회원삭제실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
 	/**
 	 * 
 	 * 로그인 처리
