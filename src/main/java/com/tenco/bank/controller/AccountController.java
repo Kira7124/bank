@@ -220,11 +220,7 @@ public class AccountController {
 		// principal.getId() -> 인증검사를 위한 id 값 필요!
 		accountService.updateAccountWithdraw(dto, principal.getId());
 		
-		
-		
-		
-		
-		return "redirect:/account/withdraw";
+		return "redirect:/account/list";
 	}
 
 	

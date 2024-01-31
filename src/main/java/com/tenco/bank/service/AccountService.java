@@ -2,6 +2,7 @@ package com.tenco.bank.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,9 @@ import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 import com.tenco.bank.repository.entity.Account;
+import com.tenco.bank.repository.entity.History;
 import com.tenco.bank.repository.interfaces.AccountRepository;
+import com.tenco.bank.repository.interfaces.HistoryRepository;
 import com.tenco.bank.utils.Define;
 
 @Service // IoC 의 대상 + Singleton 으로 관리되어짐 !
@@ -21,6 +24,8 @@ public class AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 	
+	@Autowired
+	private HistoryRepository historyRepository;
 	
 	// 계좌생성
 	// 사용자 정보 필요
@@ -86,8 +91,62 @@ public class AccountService {
 	
 	
 	@Transactional
-	public void updateAccountWithdraw(WithdrawFormDto dto, Integer id) {
+	public void updateAccountWithdraw(WithdrawFormDto dto, Integer principalId) {
 		
+		// 1
+		Account accountEntity = accountRepository.findByNumber(dto.getWAccountNumber());
+
+		if(accountEntity == null ) {
+			throw new CustomRestfulException(Define.NOT_EXIST_ACCOUNT, HttpStatus.INTERNAL_SERVER_ERROR);
+			
+			
+		}
+		
+		
+		// 2 
+		if(accountEntity.getUserId() != principalId) {
+			throw new CustomRestfulException("본인소유계좌아님!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		
+		//3 
+		// Stirng 타입은 불변이기때문에 equals 로 확인해야함 --> == no!
+		// false 나오면 ? -> 비번이 틀리는경우임!
+		if(accountEntity.getPassword().equals(dto.getWAccountPassword()) == false ) {
+			throw new CustomRestfulException("출금계좌비밀번호불일치!", HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+		
+		
+		//4 
+		if(accountEntity.getBalance() < dto.getAmount()) {
+			throw new CustomRestfulException("계좌잔액이 부족합니다!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		//5 
+		// 현재 객체의 상태값을 변경
+		accountEntity.withdraw(dto.getAmount());
+		accountRepository.updateById(accountEntity);
+		
+		
+		
+		//6
+		//거래내역등록
+		History history = new History();
+		history.setAmount(dto.getAmount());
+		history.setWBalance(accountEntity.getBalance());
+		history.setDBalance(null);
+		history.setWAccountId(accountEntity.getId());
+		history.setDAccountId(null);
+		
+		
+		
+		int rowResultCount = historyRepository.insert(history);
+		if(rowResultCount != 1) {
+			throw new CustomRestfulException("정상 처리되지 않았습니다!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
 	}
 

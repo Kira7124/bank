@@ -13,7 +13,7 @@
 	<div class="col-sm-8">
 		<h2>출금페이지(인증필요)</h2>
 		<h5>어서오세요<span style="color: red; font-weight: bold;">${name}</span> 님 환영합니다!</h5><br>
-		<form action="/account/save" method="post" >
+		<form action="/account/withdraw" method="post" >
 			  <div class="form-group">
 			    <label for="amount">출금금액</label>
 			    <input type="text" name="amount" class="form-control" placeholder="출금액입력" id="amount" value="1000">
