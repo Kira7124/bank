@@ -27,7 +27,7 @@
 			  <c:forEach items="${accountList}" var="account">
 				<tr>
 					<td>${account.number}</td>
-					<td>${account.balance}</td>
+					<td>${account.formatBalance()}</td>
 				</tr>
 			  </c:forEach>
 			</tbody>

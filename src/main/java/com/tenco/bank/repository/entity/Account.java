@@ -1,6 +1,11 @@
 package com.tenco.bank.repository.entity;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+
+import org.springframework.http.HttpStatus;
+
+import com.tenco.bank.handler.exception.CustomRestfulException;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,7 +47,43 @@ public class Account {
 	
 	
 	// 패스워드 체크 기능
+	public void checkPassword(String password) {
+		if(this.password.equals(password) == false) {
+			throw new CustomRestfulException("계좌비밀번호틀림!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	
+	
 	// 잔액여부 확인 기능
+	public void checkBalance(Long amount) {
+		if(this.balance < amount) {
+			throw new CustomRestfulException("출금잔액부족!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	
+	
 	// 계좌 소유자 확인 기능
+	public void checkOwner(Integer principalId) {
+		if(this.userId != principalId) {
+			throw new CustomRestfulException("계좌소유자가아닙니다!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	
+	
+	// 포메터 (금액)
+	public String formatBalance() {
+		DecimalFormat df = new DecimalFormat("#,###");
+		String formaterNumber = df.format(balance);
+		return formaterNumber + "원";
+	}
+	
+	
+	
 	
 }

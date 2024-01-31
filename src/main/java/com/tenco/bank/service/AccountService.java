@@ -104,26 +104,16 @@ public class AccountService {
 		
 		
 		// 2 
-		if(accountEntity.getUserId() != principalId) {
-			throw new CustomRestfulException("본인소유계좌아님!", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		accountEntity.checkOwner(principalId);
 		
 		
 		
 		//3 
-		// Stirng 타입은 불변이기때문에 equals 로 확인해야함 --> == no!
-		// false 나오면 ? -> 비번이 틀리는경우임!
-		if(accountEntity.getPassword().equals(dto.getWAccountPassword()) == false ) {
-			throw new CustomRestfulException("출금계좌비밀번호불일치!", HttpStatus.INTERNAL_SERVER_ERROR);
-
-		}
+		accountEntity.checkPassword(dto.getWAccountPassword());
 		
 		
 		//4 
-		if(accountEntity.getBalance() < dto.getAmount()) {
-			throw new CustomRestfulException("계좌잔액이 부족합니다!", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
+		accountEntity.checkBalance(dto.getAmount());
 		
 		//5 
 		// 현재 객체의 상태값을 변경
