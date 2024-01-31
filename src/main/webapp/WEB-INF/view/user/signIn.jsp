@@ -25,7 +25,8 @@
            <button type="submit" class="btn btn-info">로그인</button>
          </form>
 	  </div>
-	 <br>
+	</br>
+   </div>
    </div>
    
 <!-- main  -->

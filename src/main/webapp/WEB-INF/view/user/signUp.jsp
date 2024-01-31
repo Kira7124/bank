@@ -27,8 +27,9 @@
 	           <button type="submit" class="btn btn-info">회원가입</button>
 	         </form>
 		  </div>
-		 <br>
-	   </div>
+		</br>
+   </div>
+   </div>
 <!-- main  -->
 
 

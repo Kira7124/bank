@@ -34,9 +34,9 @@
          </form>
         </div>
 	  </div>
-	 <br>
+	 </br>
    </div>
-   
+   </div>
 <!-- main  -->
 
 

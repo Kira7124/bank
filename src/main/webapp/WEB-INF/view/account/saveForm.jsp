@@ -33,7 +33,8 @@
            <button type="submit" class="btn btn-info">계좌생성</button>
          </form>
 	  </div>
-	 <br>
+	 </br>
+   </div>
    </div>
    
 <!-- main  -->

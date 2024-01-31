@@ -16,7 +16,8 @@
 		<p>이름 : ${userdetail.username}</p>
 		<p>풀네임 : ${userdetail.fullname}</p>
 	  </div>
-	 <br>
+	</br>
+   </div>
    </div>
    
 <!-- main  -->

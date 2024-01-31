@@ -43,7 +43,8 @@
 		
 		
 	  </div>
-	 <br>
+	 </br>
+   </div>
    </div>
    
 <!-- main  -->

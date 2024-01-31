@@ -25,7 +25,8 @@
            <button type="submit" class="btn btn-info">회원탈퇴</button>
          </form>
 	  </div>
-	 <br>
+	</br>
+   </div>
    </div>
    
 <!-- main  -->
