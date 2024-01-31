@@ -310,7 +310,7 @@ public class AccountController {
 	
 	
 	@PostMapping("/transfer")
-	public String transferpagePOST(DepositFormDto ddto, WithdrawFormDto wdto,TransferFormDto tdto) {
+	public String transferpagePOST(DepositFormDto ddto, WithdrawFormDto wdto) {
 		
 		
 		// 인증검사
