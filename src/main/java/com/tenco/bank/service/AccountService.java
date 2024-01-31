@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
+import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 import com.tenco.bank.repository.entity.Account;
@@ -19,9 +20,6 @@ public class AccountService {
 	
 	@Autowired
 	private AccountRepository accountRepository;
-	
-	
-	
 	
 	
 	// 계좌생성
@@ -39,11 +37,15 @@ public class AccountService {
 		return accountEntity;
 	}
 	
+	
+	
 	// 계좌목록보기
 	public List<Account>readAccountListByUserId(Integer principalId){
 		return accountRepository.findAllByUserId(principalId);
 	}
 	
+	
+
 	
 	@Transactional
 	public void createAccount(AccountSaveFormDto dto,Integer principalId) {
@@ -70,6 +72,35 @@ public class AccountService {
 		
 		
 	}
+
+
+	// 출금기능 만들기
+	// 1 . 계좌존재 여부확인 -- Select 쿼리로 확인 
+	// 2 . 본인계좌여부 확인 -- Select 쿼리로 확인
+	// 3 . 사용자 계좌비번 확인
+	// 4 . 잔액여부 확인 
+	// 5 . 출금처리 --> Update 쿼리 
+	// 6 . 거래내역등록 --> Insert 쿼리
+	// 7 . 트랜잭션 처리 
+	
+	
+	
+	@Transactional
+	public void updateAccountWithdraw(WithdrawFormDto dto, Integer id) {
+		
+		
+	}
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

@@ -2,7 +2,6 @@ package com.tenco.bank.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
+import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 import com.tenco.bank.repository.entity.Account;
@@ -154,6 +154,83 @@ public class AccountController {
 		
 		return "account/list";
 	}
+	
+	
+	
+	// 출금페이지 요청
+	// 주소설계
+	// http://localhost:80/account/withdraw
+	
+	
+	
+	@GetMapping("/withdraw")
+	public String withdrawPageGet() {
+		
+		
+		// 인증검사
+		User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		if(principal == null) {
+			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
+		}
+		
+		
+		return "account/withdraw";
+	}
+	
+	
+	// 출금요청 로직만들기 
+	// 파싱전략 -> dto 활용
+	
+	
+	
+	@PostMapping("/withdraw")
+	public String withdrawPagePost(WithdrawFormDto dto) {
+		
+		// 인증검사
+		User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		if(principal == null) {
+			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
+		}
+		
+		// 금액입력안했을때
+		if(dto.getAmount() == null) {
+			throw new CustomRestfulException("금액을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		// <= 0 일때 
+		if(dto.getAmount().longValue() <= 0) {
+			throw new CustomRestfulException("출금금액이 0원 이하일 수 없습니다!", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		// 계좌번호확인 (앞에 null 이면 뒤에걸로 안넘어감 / not null 이면 뒤에걸로 실행)
+		if(dto.getWAccountNumber() == null || dto.getWAccountNumber().isEmpty()) {
+			throw new CustomRestfulException("계좌번호를 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 계좌비밀번호확인 (앞에 null 이면 뒤에걸로 안넘어감 / not null 이면 뒤에걸로 실행)
+		if(dto.getWAccountPassword() == null || dto.getWAccountPassword().isEmpty()) {
+			throw new CustomRestfulException("비밀번호를 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		
+		
+		//서비스호출 -> 사용자가 request 한 dto 필요 ! 
+		// principal.getId() -> 인증검사를 위한 id 값 필요!
+		accountService.updateAccountWithdraw(dto, principal.getId());
+		
+		
+		
+		
+		
+		return "redirect:/account/withdraw";
+	}
+
+	
+	
+	
+	
 	
 	
 	
