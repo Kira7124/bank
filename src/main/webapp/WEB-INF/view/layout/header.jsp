@@ -82,7 +82,7 @@
           <a class="nav-link" href="/account/deposit">입금</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">이체</a>
+          <a class="nav-link" href="/account/transfer">송금</a>
         </li>
       </ul>
       <hr class="d-sm-none">

@@ -46,6 +46,9 @@ public class Account {
 	}
 	
 	
+
+	
+	
 	// 패스워드 체크 기능
 	public void checkPassword(String password) {
 		if(this.password.equals(password) == false) {
