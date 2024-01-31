@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
+import com.tenco.bank.dto.DepositFormDto;
 import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
@@ -223,6 +224,72 @@ public class AccountController {
 		return "redirect:/account/list";
 	}
 
+	
+	
+	
+	
+	
+	
+	@GetMapping("/deposit")
+	public String depositpageGET() {
+		
+		
+		// 인증검사
+		User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		if(principal == null) {
+			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
+		}
+		
+		
+		return "account/deposit";
+		
+	}
+	
+	
+	
+	
+	
+	@PostMapping("/deposit")
+	public String depositpagePOST(DepositFormDto dto) {
+		
+		// 인증검사
+		User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		if(principal == null) {
+			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
+		}
+
+		// 금액입력안했을때
+		if (dto.getAmount() == null) {
+			throw new CustomRestfulException("금액을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+
+		// <= 0 일때
+		if (dto.getAmount().longValue() <= 0) {
+			throw new CustomRestfulException("입금금액이 0원 이하일 수 없습니다!", HttpStatus.BAD_REQUEST);
+		}
+
+		// 계좌번호확인 (앞에 null 이면 뒤에걸로 안넘어감 / not null 이면 뒤에걸로 실행)
+		if (dto.getDAccountNumber() == null || dto.getDAccountNumber().isEmpty()) {
+			throw new CustomRestfulException("계좌번호를 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+
+		// 계좌비밀번호확인 (앞에 null 이면 뒤에걸로 안넘어감 / not null 이면 뒤에걸로 실행)
+		if (dto.getDAccountPassword() == null || dto.getDAccountPassword().isEmpty()) {
+			throw new CustomRestfulException("비밀번호를 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+	
+		accountService.updateAccountDeposit(dto,principal.getId());
+		
+		return "redirect:/account/list";
+		
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	

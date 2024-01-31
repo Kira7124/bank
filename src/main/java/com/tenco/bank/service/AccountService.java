@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
+import com.tenco.bank.dto.DepositFormDto;
 import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
@@ -142,6 +143,45 @@ public class AccountService {
 
 
 
+	
+	@Transactional
+	public void updateAccountDeposit(DepositFormDto dto,Integer principalId) {
+		
+		Account accountEntity = accountRepository.findByNumber(dto.getDAccountNumber());
+		
+		if(accountEntity == null) {
+			throw new CustomRestfulException(Define.NOT_EXIST_ACCOUNT, HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		
+		// 2 
+		accountEntity.checkOwner(principalId);
+		
+		//3 
+		accountEntity.checkPassword(dto.getDAccountPassword());
+		
+		
+		// 업데이트
+		accountEntity.deposit(dto.getAmount());
+		accountRepository.updateById(accountEntity);
+
+		
+		//거래내역등록
+		History history = new History();
+		history.setAmount(dto.getAmount());
+		history.setWBalance(null);
+		history.setDBalance(accountEntity.getBalance());
+		history.setWAccountId(null);
+		history.setDAccountId(accountEntity.getId());
+		
+		
+		
+		int rowResultCount = historyRepository.insert(history);
+		if(rowResultCount != 1) {
+			throw new CustomRestfulException("정상 처리되지 않았습니다!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+	}
 
 	
 	
