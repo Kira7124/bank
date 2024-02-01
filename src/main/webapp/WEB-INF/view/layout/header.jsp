@@ -31,7 +31,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="/user/detail-user?username=${principal.username}">Home</a>
       </li>
      
       

@@ -3,7 +3,9 @@ package com.tenco.bank.repository.interfaces;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import com.tenco.bank.repository.entity.CustomHistory;
 import com.tenco.bank.repository.entity.History;
 import com.tenco.bank.repository.entity.User;
 
@@ -25,6 +27,12 @@ public interface HistoryRepository {
 	
 	//계좌 다중갯수 조회
 	public List<History> findAll();
+	
+	
+	// 파라미터 갯수가 2개 이상이면 반드시 !! @Param 을 명시해줘야한다! 
+    public List<CustomHistory> findByIdHistoryType(@Param("type")String type, @Param("id")Integer id);
+		
+	
 	
 	
 	

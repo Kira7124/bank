@@ -3,8 +3,10 @@ package com.tenco.bank.repository.interfaces;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.tenco.bank.repository.entity.Account;
+import com.tenco.bank.repository.entity.CustomHistory;
 
 //interface + xml 연결 ( mapper framework 규칙 )
 @Mapper
@@ -28,6 +30,9 @@ public interface AccountRepository {
 	
 	// 하나의 계좌 조회2 --> id 로 조회
 	public Account findAllById(Integer id);
+	
+	
+	
 	
 	
 	

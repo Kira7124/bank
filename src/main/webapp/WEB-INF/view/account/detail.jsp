@@ -15,29 +15,29 @@
 		<h5>어서오세요 <span style="color: red; font-weight: bold;">${name}</span> 님 환영합니다!</h5><br>
 	  <!-- detail 시작 -->
 	  
-		<div class ="col-sm-10">
+		<div class ="col-sm-16">
 			<table  class="table table-striped">
 			  <thead>
 				<tr>
 					<th><span style="color: red; font-weight: bold;">${name}</span> 님의 계좌</th>
-					<th>계좌번호 : ${accountHead.number}</th>
-					<th>잔액 : ${accountHead.balance}원</th>
+					<th>계좌번호 : <span style="color: red; font-weight: bold;">${account.number}</span></th>
+					<th>잔액 : <span style="color: red; font-weight: bold;">${account.formatBalance()}</span></th>
 				</tr>
 			  </thead>	
 				<tr>
 				 <tbody>
 					<td>
-						<a href="#">
+						<a href="/account/detail/${account.id}">
 							전체조회
 						</a>
 					</td>
 					<td>
-						<a href="#">
+						<a href="/account/detail/${account.id}?type=deposit">
 							입금조회
 						</a>
 					</td>
 					<td>
-						<a href="#">
+						<a href="/account/detail/${account.id}?type=withdraw">
 							출금조회
 						</a>
 					</td>
@@ -48,29 +48,33 @@
 			<table class= "table table-striped">
 			 <thead>
 				<tr>
-					<th>날짜</th>
-					<th>보낸이</th>
+					<th>생성일</th>
 					<th>받은이</th>
-					<th>입출금금액</th>
-					<th>계좌잔액</th>
+					<th>보낸이</th>
+					<th>금액</th>
+					<th>잔액</th>
 				</tr>
 			  </thead>
+		<c:choose>
+	  		<c:when test="${historyList != null}">	  
 			  <tbody>
-				<tr>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-				</tr>
+			  	<c:forEach items="${historyList}" var="history">
+				  <tr>
+					<td>${history.formatCreatedAt()}</td>
+					<td>${history.receiver}</td>
+					<td>${history.sender}</td>
+					<td>${history.formatAmount()}</td>
+					<td>${history.formatBalance()}</td>
+				 </tr>
+				</c:forEach> 
 			  </tbody>		
 			</table>
-	
+		  </c:when>	
+		<c:otherwise>
+		  	<p>고객님의 내역이 없습니다</p>
+		 </c:otherwise>
+	 </c:choose>	
 		</div>
-	
-		
-		
-		
 	  </div>
 	 </br>
    </div>

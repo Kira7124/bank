@@ -86,7 +86,6 @@ public class Account {
 		return formaterNumber + "원";
 	}
 	
-	
-	
+
 	
 }

@@ -14,6 +14,8 @@
 		<h2>나의 계좌목록</h2>
 		<h5>어서오세요 <span style="color: red; font-weight: bold;">${name}</span> 님 환영합니다!</h5><br>
 	  <!-- 만약 accountList null or not null -->
+	  
+	  
 <c:choose>
 	  <c:when test="${accountList != null}">
 	  	<table class="table table-bordered table-sm">

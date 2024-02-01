@@ -15,6 +15,7 @@ import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 import com.tenco.bank.repository.entity.Account;
+import com.tenco.bank.repository.entity.CustomHistory;
 import com.tenco.bank.repository.entity.History;
 import com.tenco.bank.repository.interfaces.AccountRepository;
 import com.tenco.bank.repository.interfaces.HistoryRepository;
@@ -45,13 +46,7 @@ public class AccountService {
 	}
 	
 	
-	// 단일계좌검색기능 --> 계좌상세내역 보기용
-	public Account detailAccount(Integer id) {
-		
-		Account accountEntitiy = accountRepository.findAllById(id);
-		return accountEntitiy;
-		
-	}
+
 	
 	
 	
@@ -254,9 +249,29 @@ public class AccountService {
 		
 		
 	}
+
+
+	/**
+	 * 단일계좌거래내역검색(전체 , 입금 , 출금 내역 확인)
+	 * @param type
+	 * @param id
+	 * @return 동적쿼리 -List
+	 */
+	
+
+	// 단일계좌거래내역검색 상세보기 List로 받아오기
+	public List<CustomHistory> readHistoryListByAccount(String type, Integer id) {
+		return historyRepository.findByIdHistoryType(type, id);
+	}
 	
 	
-	
+	// 단일계좌검색기능 --> 계좌상세내역 보기용
+	public Account detailAccount(Integer id) {
+		
+		Account accountEntitiy = accountRepository.findAllById(id);
+		return accountEntitiy;
+		
+	}
 	
 
 	

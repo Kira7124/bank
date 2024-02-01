@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
 import com.tenco.bank.dto.DepositFormDto;
@@ -18,6 +19,7 @@ import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 import com.tenco.bank.repository.entity.Account;
+import com.tenco.bank.repository.entity.CustomHistory;
 import com.tenco.bank.repository.entity.User;
 import com.tenco.bank.service.AccountService;
 import com.tenco.bank.utils.Define;
@@ -346,6 +348,7 @@ public class AccountController {
 	// 계좌 상세보기 페이지 -- 전체 , 입금 , 출금
 	// 주소설계
 	// http:/localhost:80/account/detail/1
+	// http:/localhost:80/account/detail/1?type=
 	
 	
 	
@@ -353,7 +356,13 @@ public class AccountController {
 	
 	
 	@GetMapping("/detail/{id}")
-	public String detailpageGET(@PathVariable Integer id, Model model) {
+	public String detailpageGET(@PathVariable Integer id,
+			@RequestParam(name ="type", defaultValue = "all", required = false) String type, Model model) {
+	
+		
+		
+		System.out.println("type : " + type);
+		
 		
 		// 인증검사
 		User principal = (User)session.getAttribute(Define.PRINCIPAL);
@@ -362,8 +371,19 @@ public class AccountController {
 		}
 		
 		
-		Account accountHead = accountService.detailAccount(id);
-		model.addAttribute("accountHead", accountHead);
+		
+		
+		//서비스 호출
+		
+		Account account = accountService.detailAccount(id);
+		List<CustomHistory> historylist =  accountService.readHistoryListByAccount(type,id);
+		
+		System.out.println("list :" + historylist.toString());
+		
+		model.addAttribute("account", account);
+		model.addAttribute("historyList", historylist);
+		
+		//서비스 호출
 		
 		
 		
