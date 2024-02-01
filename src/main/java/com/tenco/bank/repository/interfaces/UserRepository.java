@@ -32,7 +32,8 @@ public interface UserRepository {
 	// 아이디 , 비밀번호로 회원조회 -> 로그인처리
 	public User findByUsernameAndPassword(User user);
 	
-	
+	// 포인트증가 -> 유저네임받아서
+	public User pointChange(String username);
 	
 	
 	

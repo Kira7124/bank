@@ -10,6 +10,7 @@ public class SignUpFormDto {
 	private String password;
 	private String fullname;
 	private String userimg;
+	private Integer point;
 	
 	// 파일 처리
 	

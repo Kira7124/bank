@@ -140,6 +140,8 @@ public class UserController {
 			throw new CustomRestfulException("password을 입력하세요!", HttpStatus.BAD_REQUEST);
 		}
 		
+		
+		
 		// 서비스 호출 예정....
 		User user =	userService.readUser(dto);
 		System.out.println("22222222222222222222222222");
@@ -210,6 +212,9 @@ public class UserController {
 		model.addAttribute("userdetail", Userdetail);
 		return "user/detail";
 	}
+	
+	
+	
 	
 	
 	

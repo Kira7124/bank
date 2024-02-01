@@ -16,6 +16,7 @@
 		<p><img src="${pageContext.request.contextPath}/resources/img/${userdetail.userimg}"></p>
 		<p>이름 : ${userdetail.username}</p>
 		<p>풀네임 : ${userdetail.fullname}</p>
+		<p>포인트 : ${userdetail.point}</p> 
 	  </div>
 	</br>
    </div>

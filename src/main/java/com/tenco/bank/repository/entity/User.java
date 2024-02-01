@@ -21,6 +21,7 @@ public class User {
 	private String fullname;
 	private Timestamp createdAt;
 	private String userimg;
+	private Integer point;
 	
 	
 	

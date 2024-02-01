@@ -45,6 +45,16 @@
 	</update>
 	
 	
+	<update id ="pointChange">
+		update user_tb
+		set point = point + 10
+		where username = #{username}
+	</update>
+	
+	
+	
+	
+	
 	
 
 </mapper>
