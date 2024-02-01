@@ -19,9 +19,9 @@
 			<table  class="table table-striped">
 			  <thead>
 				<tr>
-					<th><span style="color: red; font-weight: bold;">${name}</span> 님의 계좌</th>
-					<th>계좌번호 : <span style="color: red; font-weight: bold;">${account.number}</span></th>
-					<th>잔액 : <span style="color: red; font-weight: bold;">${account.formatBalance()}</span></th>
+					<th><span style="color: blue; font-weight: bold;">${name}</span> 님의 계좌</th>
+					<th>계좌번호 : <span style="color: blue; font-weight: bold;">${account.number}</span></th>
+					<th>잔액 : <span style="color: blue; font-weight: bold;">${account.formatBalance()}</span></th>
 				</tr>
 			  </thead>	
 				<tr>
