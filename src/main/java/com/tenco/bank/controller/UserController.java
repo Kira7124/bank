@@ -144,6 +144,7 @@ public class UserController {
 		
 		// 서비스 호출 예정....
 		User user =	userService.readUser(dto);
+		userService.pointUser(dto.getUsername());
 		System.out.println("22222222222222222222222222");
 		httpSession.setAttribute(Define.PRINCIPAL, user);
 		httpSession.setAttribute("name", user.getUsername());

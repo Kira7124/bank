@@ -33,7 +33,7 @@ public interface UserRepository {
 	public User findByUsernameAndPassword(User user);
 	
 	// 포인트증가 -> 유저네임받아서
-	public User pointChange(String username);
+	public Integer pointChange(String username);
 	
 	
 	
