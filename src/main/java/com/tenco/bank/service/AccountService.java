@@ -45,6 +45,16 @@ public class AccountService {
 	}
 	
 	
+	// 단일계좌검색기능 --> 계좌상세내역 보기용
+	public Account detailAccount(Integer id) {
+		
+		Account accountEntitiy = accountRepository.findAllById(id);
+		return accountEntitiy;
+		
+	}
+	
+	
+	
 	
 	// 계좌목록보기
 	public List<Account>readAccountListByUserId(Integer principalId){
@@ -81,17 +91,18 @@ public class AccountService {
 	}
 
 
-	// 출금기능 만들기
+	// 출/입금기능 만들기
 	// 1 . 계좌존재 여부확인 -- Select 쿼리로 확인 
 	// 2 . 본인계좌여부 확인 -- Select 쿼리로 확인
 	// 3 . 사용자 계좌비번 확인
 	// 4 . 잔액여부 확인 
-	// 5 . 출금처리 --> Update 쿼리 
+	// 5 . 출/입금처리 --> Update 쿼리 
 	// 6 . 거래내역등록 --> Insert 쿼리
 	// 7 . 트랜잭션 처리 
 	
 	
 	
+	// 출금
 	@Transactional
 	public void updateAccountWithdraw(WithdrawFormDto dto, Integer principalId) {
 		
@@ -101,18 +112,13 @@ public class AccountService {
 		if(accountEntity == null ) {
 			throw new CustomRestfulException(Define.NOT_EXIST_ACCOUNT, HttpStatus.INTERNAL_SERVER_ERROR);
 			
-			
 		}
-		
 		
 		// 2 
 		accountEntity.checkOwner(principalId);
 		
-		
-		
 		//3 
 		accountEntity.checkPassword(dto.getWAccountPassword());
-		
 		
 		//4 
 		accountEntity.checkBalance(dto.getAmount());
@@ -121,8 +127,6 @@ public class AccountService {
 		// 현재 객체의 상태값을 변경
 		accountEntity.withdraw(dto.getAmount());
 		accountRepository.updateById(accountEntity);
-		
-		
 		
 		//6
 		//거래내역등록
@@ -134,7 +138,6 @@ public class AccountService {
 		history.setDAccountId(null);
 		
 		
-		
 		int rowResultCount = historyRepository.insert(history);
 		if(rowResultCount != 1) {
 			throw new CustomRestfulException("정상 처리되지 않았습니다!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -144,7 +147,8 @@ public class AccountService {
 
 
 
-	
+
+	// 입금
 	@Transactional
 	public void updateAccountDeposit(DepositFormDto dto,Integer principalId) {
 		
@@ -198,6 +202,8 @@ public class AccountService {
 	// 9. 트랜잭션처리
 	
 	
+
+	// 송금
 	@Transactional
 	public void transferAccount(DepositFormDto ddto, WithdrawFormDto wdto,Integer principalId) {
 		// 출금계좌존재여부확인 , 입금계좌존재여부확인
@@ -234,7 +240,7 @@ public class AccountService {
 		//거래내역등록처리(쿼리테스트선행)
 		//거래내역등록
 		History history = new History();
-		history.setAmount(ddto.getAmount()-wdto.getAmount());
+		history.setAmount(wdto.getAmount());
 		history.setWBalance(accountentity1.getBalance());
 		history.setDBalance(accountentity2.getBalance());
 		history.setWAccountId(accountentity1.getId());

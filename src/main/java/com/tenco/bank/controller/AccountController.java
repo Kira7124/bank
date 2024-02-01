@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -164,7 +165,7 @@ public class AccountController {
 	// http://localhost:80/account/withdraw
 	
 	
-	
+	// 출금
 	@GetMapping("/withdraw")
 	public String withdrawPageGet() {
 		
@@ -230,7 +231,7 @@ public class AccountController {
 	
 	
 	
-	
+	// 입금
 	@GetMapping("/deposit")
 	public String depositpageGET() {
 		
@@ -339,6 +340,43 @@ public class AccountController {
 		accountService.transferAccount(ddto, wdto, principal.getId());
 		return "redirect:/account/list";
 	}
+	
+	
+	
+	// 계좌 상세보기 페이지 -- 전체 , 입금 , 출금
+	// 주소설계
+	// http:/localhost:80/account/detail/1
+	
+	
+	
+	
+	
+	
+	@GetMapping("/detail/{id}")
+	public String detailpageGET(@PathVariable Integer id, Model model) {
+		
+		// 인증검사
+		User principal = (User)session.getAttribute(Define.PRINCIPAL);
+		if(principal == null) {
+			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
+		}
+		
+		
+		Account accountHead = accountService.detailAccount(id);
+		model.addAttribute("accountHead", accountHead);
+		
+		
+		
+		return "account/detail";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

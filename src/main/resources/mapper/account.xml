@@ -30,7 +30,9 @@
 	</select>
 	
 	
-	
+	<select id="findAllById" resultType="com.tenco.bank.repository.entity.Account">
+		select * from account_tb where id = #{id} 
+	</select>
 
 
 

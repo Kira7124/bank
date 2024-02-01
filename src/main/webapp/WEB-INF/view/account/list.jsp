@@ -26,7 +26,11 @@
 			<tbody>
 			  <c:forEach items="${accountList}" var="account">
 				<tr>
-					<td>${account.number}</td>
+					<td>
+						<a href="/account/detail/${account.id}">
+						   ${account.number}
+						</a>
+					</td>
 					<td>${account.formatBalance()}</td>
 				</tr>
 			  </c:forEach>

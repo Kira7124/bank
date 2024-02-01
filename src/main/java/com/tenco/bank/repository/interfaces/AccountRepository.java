@@ -26,7 +26,8 @@ public interface AccountRepository {
 	// 하나의 계좌 조회
 	public Account findByNumber(String number);
 	
-	
+	// 하나의 계좌 조회2 --> id 로 조회
+	public Account findAllById(Integer id);
 	
 	
 	
