@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
 import com.tenco.bank.dto.DepositFormDto;
+import com.tenco.bank.dto.SignInFormDto;
+import com.tenco.bank.dto.SignUpFormDto;
 import com.tenco.bank.dto.TransferFormDto;
 import com.tenco.bank.dto.WithdrawFormDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
@@ -22,8 +24,10 @@ import com.tenco.bank.repository.entity.Account;
 import com.tenco.bank.repository.entity.CustomHistory;
 import com.tenco.bank.repository.entity.User;
 import com.tenco.bank.service.AccountService;
+import com.tenco.bank.service.UserService;
 import com.tenco.bank.utils.Define;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -42,7 +46,8 @@ public class AccountController {
 	private AccountService accountService;
 	// ++생성자 의존주입 -> DI (직접 만들어도 됨)
 	
-	
+	@Autowired
+	private UserService userService;
 	
 	
 	// 주소설계
@@ -138,7 +143,7 @@ public class AccountController {
 	 */
 	
 	
-	@GetMapping({"/list","/"})
+	@GetMapping( {"/list", "/"})
 	public String listPage(Model model) {
 		
 		// 1.인증검사
@@ -147,9 +152,11 @@ public class AccountController {
 			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
 		}
 		
-		
+
 		// ++ 경우의 수 -> 있거나 없거나 둘 중 한개 설정 (model) 
 		List<Account> accountList = accountService.readAccountListByUserId(principal.getId());
+		
+		
 		
 		if(accountList.isEmpty()) {
 			model.addAttribute("accountList", null);
@@ -347,7 +354,7 @@ public class AccountController {
 	
 	// 계좌 상세보기 페이지 -- 전체 , 입금 , 출금
 	// 주소설계
-	// http:/localhost:80/account/detail/1
+	// http:/localhost:80/account/detail
 	// http:/localhost:80/account/detail/1?type=
 	
 	

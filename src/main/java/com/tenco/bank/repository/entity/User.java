@@ -20,7 +20,7 @@ public class User {
 	private String password;
 	private String fullname;
 	private Timestamp createdAt;
-	
+	private String userimg;
 	
 	
 	

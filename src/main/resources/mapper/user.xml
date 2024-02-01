@@ -40,7 +40,10 @@
 	</select>
 	
 	
-
+	<update id ="imgChange">
+		update user_tb set userimg = #{userimg} where id = #{id}
+	</update>
+	
 	
 	
 

@@ -41,7 +41,9 @@
 	  </c:when>
 	 <c:otherwise>
 	  	<p>고객님의 계좌가 없습니다</p>
-	  	<a href ="/account/save">계좌생성하기</a>
+	  	<a href ="/account/save">
+	  	  <button type="submit" class="btn btn-info">계좌생성하기</button>	
+	  	</a>
 	 </c:otherwise>
 </c:choose>	
 	

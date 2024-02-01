@@ -13,6 +13,7 @@
 	<div class="col-sm-8">
 		<h2>마이페이지</h2>
 		<h5>어서오세요 <span style="color: red; font-weight: bold;">${name}</span> 님 환영합니다!</h5><br>
+		<p><img src="${pageContext.request.contextPath}/resources/img/${userdetail.userimg}"></p>
 		<p>이름 : ${userdetail.username}</p>
 		<p>풀네임 : ${userdetail.fullname}</p>
 	  </div>

@@ -1,5 +1,10 @@
 package com.tenco.bank.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -7,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tenco.bank.dto.SignInFormDto;
 import com.tenco.bank.dto.SignUpFormDto;
@@ -15,6 +22,7 @@ import com.tenco.bank.repository.entity.User;
 import com.tenco.bank.service.UserService;
 import com.tenco.bank.utils.Define;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -29,7 +37,9 @@ public class UserController {
 	@Autowired // DI 처리
 	private HttpSession httpSession;
 	
-	
+
+	@Autowired
+	private ServletContext servletContext;
 	
 	
 	// 회원 가입
@@ -200,6 +210,45 @@ public class UserController {
 		model.addAttribute("userdetail", Userdetail);
 		return "user/detail";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
