@@ -22,6 +22,7 @@
 			  <div class="form-group">
 			    <label for="pwd">계좌비밀번호</label>
 			    <input type="password" name="password" class="form-control" placeholder="등록된PW입력" id="pwd">
+			    <div id="pw-msg"></div>
 			  </div>
 			  
 			  <div class="form-group">
@@ -38,6 +39,28 @@
    </div>
    
 <!-- main  -->
+
+<script>
+    var pwd = document.querySelector("#pwd");
+    var pwMsg = document.querySelector("#pw-msg");
+
+    pwd.addEventListener("input", checkPw);
+
+    function checkPw() {
+        var pattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
+
+        if (pwd.value === "") {
+            pwMsg.innerHTML = "";
+        } else if (!pattern.test(pwd.value)) {
+            pwMsg.innerHTML = "위험 - 8자이상입력하세요!";
+            pwMsg.style.color = "#d9534f";
+        } else {
+            pwMsg.innerHTML = "안전한 비밀번호입니다!";
+            pwMsg.style.color = "#03c75a";
+        }
+    }
+</script>
+
 
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
