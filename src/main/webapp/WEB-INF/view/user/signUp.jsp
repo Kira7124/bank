@@ -16,7 +16,7 @@
 		const username = document.getElementById("join-id").value;
 		
 		   if (username.trim() === "") {
-	            alert('아이디를 입력하세요!');
+	            alert('사용자이름을 입력하세요!');
 	            return;
 	        }
 		

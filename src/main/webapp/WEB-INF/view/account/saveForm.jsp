@@ -6,17 +6,64 @@
 <!-- header  -->
 
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 
 <!-- main  -->
+
+ <script>
+	function checkNum(){
+		const number = document.getElementById("number-id").value;
+		
+		
+		if(number.trim() === ""){
+			alert('계좌번호를 입력하세요');
+			return;
+			
+		}
+		
+		$.ajax({
+			url:"/account/checkAccountNum",
+			type: "GET",
+			data:{
+				number : number
+			},
+			success: function(data){
+				
+				if(data === "duplicate"){
+					alert('이미존재하는계좌입니다!');
+				}
+				
+				if(data === "not-duplicate"){
+					alert('사용가능한 계좌입니다!');
+				}
+				
+				
+				
+			},
+			error: function(data){
+				alert('에러가발생했습니다!');
+			}
+			
+			
+		});
+		
+		
+	}
+ </script>
+
+
+
 
 	<div class="col-sm-8">
 		<h2>계좌생성페이지 (인증필요)</h2>
 		<h5>어서오세요 <span style="color: red; font-weight: bold;">${name}</span> 님 환영합니다!</h5><br>
 		<form action="/account/save" method="post" >
-			  <div class="form-group">
-			    <label for="number">계좌번호</label>
-			    <input type="text" name="number" class="form-control" placeholder="등록된번호입력" id="number" value="5555">
+			  <label for="number">계좌번호</label>
+			 <div class="form-group d-flex align-items-center">
+			    <input type="text" name="number" class="form-control" placeholder="등록된번호입력" id="number-id" value="5555">
+			    <button type="button" class="btn btn-danger ml-2" id="check-id" onclick="checkNum()">중복확인</button>
 			  </div>
 			  
 			  <div class="form-group">

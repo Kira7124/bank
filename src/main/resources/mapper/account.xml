@@ -34,6 +34,12 @@
 		select * from account_tb where id = #{id} 
 	</select>
 
-
+	
+	<select id="checkAccountNum" resultType="Integer">
+		select count(*) from account_tb where number = #{number}
+	</select>
+	
+	
+	
 
 </mapper>

@@ -273,6 +273,17 @@ public class AccountService {
 		
 	}
 	
+	
+	
+	//계좌중복체크
+	public Integer checkAccountNum(String number) {
+		
+		Integer checkAccountNum = accountRepository.checkAccountNum(number);
+		return checkAccountNum;
+		
+	}
+	
+	
 
 	
 	

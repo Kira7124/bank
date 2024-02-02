@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tenco.bank.dto.AccountSaveFormDto;
 import com.tenco.bank.dto.DepositFormDto;
@@ -374,7 +375,22 @@ public class AccountController {
 	
 	
 	
+	//계좌중복체크
 	
+	@GetMapping("/checkAccountNum")
+	@ResponseBody
+	public String checkAccountNumGet(@RequestParam("number") String number) {
+		Integer result = accountService.checkAccountNum(number);
+		
+		if(result == 1) {
+			return "duplicate";
+			
+		} else {
+			return "not-duplicate";
+		}
+		
+		
+	}
 	
 	
 	

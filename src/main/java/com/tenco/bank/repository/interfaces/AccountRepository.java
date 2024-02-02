@@ -31,7 +31,8 @@ public interface AccountRepository {
 	// 하나의 계좌 조회2 --> id 로 조회
 	public Account findAllById(Integer id);
 	
-	
+	//중복계좌조화
+	public Integer checkAccountNum(String number);
 	
 	
 	
