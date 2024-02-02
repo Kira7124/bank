@@ -67,9 +67,7 @@ public class AccountController {
 		 */
 		
 		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
+	
 		
 		
 		
@@ -148,9 +146,7 @@ public class AccountController {
 		
 		// 1.인증검사
 		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
+	
 		
 
 		// ++ 경우의 수 -> 있거나 없거나 둘 중 한개 설정 (model) 
@@ -194,9 +190,7 @@ public class AccountController {
 		
 		// 인증검사
 		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
+	
 		
 		// 금액입력안했을때
 		if(dto.getAmount() == null) {
@@ -254,9 +248,7 @@ public class AccountController {
 		
 		// 인증검사
 		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
+	
 
 		// 금액입력안했을때
 		if (dto.getAmount() == null) {
@@ -310,9 +302,7 @@ public class AccountController {
 		
 		// 인증검사
 		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
+	
 		
 		// 금액입력안했을때
 		if (wdto.getAmount() == null) {

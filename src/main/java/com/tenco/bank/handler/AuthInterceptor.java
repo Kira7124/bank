@@ -46,6 +46,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 	
 	
 	
+	
+	
+	
+	
 	// 뷰가 렌더링 되기 전에 호출되는 메서드
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -53,6 +57,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
+	
+	
+	
 	
 	
 	
