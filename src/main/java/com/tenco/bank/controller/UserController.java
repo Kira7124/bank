@@ -142,6 +142,7 @@ public class UserController {
 		userService.pointUser(dto.getUsername());
 		System.out.println("22222222222222222222222222");
 		httpSession.setAttribute(Define.PRINCIPAL, user);
+		// Define.PRINCIPAL --> 이안에 "principal" 이 되어있어서 user 객체가 "principal" 안에 담겨있는것이랑 동일!
 		httpSession.setAttribute("name", user.getUsername());
 		//로그인 완료 --> 페이지 결정 (account/list)
 		// todo 수정예정 (현재 접근 경로없음)
@@ -226,7 +227,7 @@ public class UserController {
 		else {
 			return "not-duplicate";
 		}
-	
+		
 		
 	 }
 	
