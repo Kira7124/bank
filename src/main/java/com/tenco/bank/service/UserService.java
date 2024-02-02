@@ -2,6 +2,7 @@ package com.tenco.bank.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	/**
 	 * 회원가입 로직처리
@@ -32,9 +35,12 @@ public class UserService {
 	@Transactional
 	public void createUser(SignUpFormDto dto) {
 		
+		// 추가 개념 암호화 처리
+		
+		
 		User user = User.builder()
 				.username(dto.getUsername())
-				.password(dto.getPassword())
+				.password(passwordEncoder.encode(dto.getPassword()))
 				.fullname(dto.getFullname())
 				.build();
 		
