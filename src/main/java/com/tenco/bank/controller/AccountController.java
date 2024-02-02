@@ -178,13 +178,7 @@ public class AccountController {
 	@GetMapping("/withdraw")
 	public String withdrawPageGet() {
 		
-		
-		// 인증검사
-		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
-		
+			
 		
 		return "account/withdraw";
 	}
@@ -245,12 +239,7 @@ public class AccountController {
 	public String depositpageGET() {
 		
 		
-		// 인증검사
-		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
-		
+
 		
 		return "account/deposit";
 		
@@ -306,11 +295,7 @@ public class AccountController {
 	public String transferpageGET() {
 		
 		
-		// 인증검사
-		User principal = (User)session.getAttribute(Define.PRINCIPAL);
-		if(principal == null) {
-			throw new UnAuthorizedException("로그인 이 필요합니다!", HttpStatus.UNAUTHORIZED);
-		}
+
 		
 		return "account/transfer";
 		
