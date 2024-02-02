@@ -54,7 +54,7 @@ public class UserService {
 	
 	
 	
-	
+	//회원삭제
 	@Transactional
 	public void deleteUser(SignUpFormDto dto) {
 		
@@ -75,7 +75,7 @@ public class UserService {
 	
 	
 	
-	
+	//회원상세보기
 	@Transactional
 	public User detailUser(SignUpFormDto dto) {
 		
@@ -102,6 +102,9 @@ public class UserService {
 	 * @param SignInFormDto
 	 * @return User
 	 */
+	
+	
+	//회원로그인(암호화까지)
 	public User readUser(SignInFormDto dto) {
 		
 		// 1.사용자의 username 만 받아서 정보를 추출할거임.
@@ -136,6 +139,9 @@ public class UserService {
 	
 	
 	
+	
+	
+	//회원포인트증가(출석포인트10)
 	public Integer pointUser(String name) {
 		
 		Integer pointup = userRepository.pointChange(name);
