@@ -59,6 +59,9 @@
 	</update>
 	
 	
+	<select id ="checkID" resultType="Integer">
+			select count(*) from user_tb where username=#{username}
+	</select>
 	
 	
 	

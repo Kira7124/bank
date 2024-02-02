@@ -40,6 +40,7 @@ public interface UserRepository {
 	// 포인트증가 -> 유저네임받아서
 	public Integer pointChange(String username);
 	
-	
+	//아이디중복체크 ->유저네임받아서
+	public Integer checkID(String username);
 	
 }

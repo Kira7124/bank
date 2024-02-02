@@ -4,16 +4,60 @@
 <!-- header  -->
 
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 
 <!-- main  -->
+
+
+
+<script>
+	function checkId(){
+		const username = document.getElementById("join-id").value;
+		
+		   if (username.trim() === "") {
+	            alert('아이디를 입력하세요!');
+	            return;
+	        }
+		
+		$.ajax({
+			url:"/user/checkID",
+			type: "GET",
+			data:{
+				username : username
+			},
+			success: function(data){
+				
+				if(data === "duplicate"){
+					alert('이미존재하는이름입니다!');
+				}
+				
+				if(data === "not-duplicate"){
+					alert('사용가능한 이름입니다!');
+				}
+				
+				
+				
+			},
+			error: function(data){
+				alert('에러가발생했습니다!');
+			}
+			
+			
+		});
+		
+	}
+</script>
+
+
 		<div class="col-sm-8">
 			<h2>회원가입</h2>
 			<h5>어서오세요 환영합니다!</h5>
 			<form action="/user/sign-up" method="post" >
-				  <div class="form-group">
 				    <label for="username">사용자명</label>
-				    <input type="text" name="username" class="form-control" placeholder="이름을입력하세요" id="username">
+				  <div class="form-group d-flex align-items-center">
+				    <input type="text" name="username" class="form-control" placeholder="이름을입력하세요" id="join-id">
+				    <button type="button" class="btn btn-success ml-2" id="check-id" onclick="checkId()">중복확인</button>
 				  </div>
 				  <div class="form-group">
 				    <label for="pwd">비밀번호</label>

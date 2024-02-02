@@ -151,6 +151,17 @@ public class UserService {
 	
 	
 	
+	//회원명중복체크
+	public Integer checkID(String name) {
+		
+		Integer checkID = userRepository.checkID(name);
+		
+		return checkID;
+	}
+	
+	
+	
+	
 	
 	
 }

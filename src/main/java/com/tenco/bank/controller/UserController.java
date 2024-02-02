@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -206,7 +208,7 @@ public class UserController {
 	
 	
 	
-	
+	//마이페이지
 	@GetMapping("/detail-user")
 	public String memberDetail(SignUpFormDto dto,Model model) {
 		User Userdetail = userService.detailUser(dto);
@@ -217,6 +219,24 @@ public class UserController {
 	
 	
 	
+	
+	//아이디중복체크
+	@GetMapping("/checkID")
+	@ResponseBody
+	public String checkIDGet(@RequestParam("username") String username) {
+		Integer result = userService.checkID(username);
+		
+		if(result == 1) {
+			return "duplicate";
+		} 
+		
+		else {
+			return "not-duplicate";
+		}
+	
+		
+		
+	 }
 	
 	
 	
