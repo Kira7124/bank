@@ -104,17 +104,30 @@ public class UserService {
 	 */
 	public User readUser(SignInFormDto dto) {
 		
+		// 1.사용자의 username 만 받아서 정보를 추출할거임.
+		User userEntity = userRepository.findByUsername2(dto.getUsername());
+		
+		if(userEntity == null) {
+			throw new CustomRestfulException("존재하지 않는 계정입니다", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		boolean isPwdMathched = passwordEncoder.matches(dto.getPassword(), userEntity.getPassword());
+		
+		
+		if(isPwdMathched == false) {
+			throw new CustomRestfulException("비밀번호가 틀렸습니다", HttpStatus.BAD_REQUEST);
+		}
+		
+		
 		User user =  User.builder()
 				.username(dto.getUsername())
 				.password(dto.getPassword())
 				.build();
 		
 		
-		User userEntity =  userRepository.findByUsernameAndPassword(user);
-		
-		if(userEntity == null) {
-			throw new UnAuthorizedException("인증된 사용자가 아닙니다",HttpStatus.UNAUTHORIZED);
-		}
+		// User userEntity =  userRepository.findByUsernameAndPassword(user);
+
 		
 		return userEntity;
 		

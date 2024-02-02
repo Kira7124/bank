@@ -29,6 +29,11 @@ public interface UserRepository {
 	//사용자 username으로 존재여부확인 -> 중복검사 등 에 활용
 	public User findByUsername(User user);
 	
+	
+	//사용자 username으로 존재여부확인 -> 중복검사 등 에 활용2
+	public User findByUsername2(String username);
+	
+	
 	// 아이디 , 비밀번호로 회원조회 -> 로그인처리
 	public User findByUsernameAndPassword(User user);
 	
