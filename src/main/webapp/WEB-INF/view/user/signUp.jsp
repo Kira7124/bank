@@ -57,7 +57,7 @@
 		<div class="col-sm-8">
 			<h2>회원가입</h2>
 			<h5>어서오세요 환영합니다!</h5>
-			<form action="/user/sign-up" method="post" >
+			<form action="/user/sign-up" method="post" enctype="multipart/form-data">
 				    <label for="username">사용자명</label>
 				  <div class="form-group d-flex align-items-center">
 				    <input type="text" name="username" class="form-control" placeholder="이름을입력하세요" id="join-id">
@@ -72,7 +72,12 @@
 				    <label for="fullname">풀네임</label>
 				    <input type="text" name="fullname" class="form-control" placeholder="풀네임을입력하세요" id="fullname">
 				  </div>
-			   <!-- 이벤트 전파속성 -> 버블링? 캡처링? 뭔가 -->	  
+			  		<!-- 이벤트 전파속성 -> 버블링? 캡처링? 뭔가용? -->	  
+			   	   <div class="custom-file">
+					  <input type="file" class="custom-file-input" id="customFile" name="customFile"><br>
+					  <label class="custom-file-label" for="customFile">파일선택</label>
+				   </div>
+			   
 	           <button type="submit" class="btn btn-info">회원가입</button>
 	         </form>
 		  </div>
@@ -80,6 +85,15 @@
    </div>
    </div>
    
+   
+   
+   
+<script>
+	$(".custom-file-input").on("change", function() {
+	  var fileName = $(this).val().split("\\").pop();
+	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+</script>   
    
    
 <script>

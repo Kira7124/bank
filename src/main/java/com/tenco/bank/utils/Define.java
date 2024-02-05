@@ -9,6 +9,11 @@ public class Define {
 	// 상수 --> 모든 인스턴스들이 공유하게 static 선언!
 	public static final String PRINCIPAL = "principal";
 	
+	// 이미지관련 
+	public static final String UPLOAD_FILE_DIRECTORY = "C:\\workspace_sts4\\upload";
+	public static final int MAX_FILE_SIZE = 1024 * 1024 * 20;
+	
+	
 	//  Account
 	public static final String EXIST_ACCOUNT = "이미 계좌가 존재합니다.";
 	public static final String NOT_EXIST_ACCOUNT = "존재하는 계좌가 없습니다.";

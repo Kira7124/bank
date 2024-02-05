@@ -11,6 +11,11 @@ spring:
     view:
       prefix: /WEB-INF/view/
       suffix: .jsp
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+      
   datasource:    
     url: jdbc:mysql://localhost:3306/mybank?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
