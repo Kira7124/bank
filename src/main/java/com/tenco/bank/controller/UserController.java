@@ -1,6 +1,7 @@
 package com.tenco.bank.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,26 +79,26 @@ public class UserController {
 		
 		
 		System.out.println("dto :" + dto.toString());
-		System.out.println(dto.getFile().getOriginalFilename());
+		System.out.println(dto.getCustomFile().getOriginalFilename());
 		
 		
 		//  1. 인증검사 x 
 		//  2. 유효성검사 o
-//		if(dto.getUsername() == null || dto.getUsername().isEmpty()) {
-//			throw new CustomRestfulException("username을 입력하세요!", HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		if(dto.getPassword() == null || dto.getPassword().isEmpty()) {
-//			throw new CustomRestfulException("password를 입력하세요!", HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		if(dto.getFullname() == null || dto.getFullname().isEmpty()) {
-//			throw new CustomRestfulException("fullname을 입력하세요!", HttpStatus.BAD_REQUEST);
-//		}
+		if(dto.getUsername() == null || dto.getUsername().isEmpty()) {
+			throw new CustomRestfulException("username을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		if(dto.getPassword() == null || dto.getPassword().isEmpty()) {
+			throw new CustomRestfulException("password를 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+		if(dto.getFullname() == null || dto.getFullname().isEmpty()) {
+			throw new CustomRestfulException("fullname을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
 		
 		
 		//파일업로드 
-		MultipartFile file = dto.getFile();
+		MultipartFile file = dto.getCustomFile();
 		if(file.isEmpty() == false) {
 			// 사용자가 이미지를 업로드 했다면 기능구현
 			// 1. 파일사이즈 체크
@@ -124,15 +125,26 @@ public class UserController {
 			System.out.println("fileName :" + fileName);
 			
 			
+			String uploadPath = Define.UPLOAD_FILE_DIRECTORY + File.separator + fileName;
+			File destination = new File(uploadPath);
 			
+			
+			
+			try {
+				file.transferTo(destination);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
 
-			
+			// 객체상태변경
+			dto.setOriginFileName(file.getOriginalFilename());
+			dto.setUploadFileName(fileName);
 			
 			
 		}
 		
 		
-		//userService.createUser(dto);
+		userService.createUser(dto);
 		return "redirect:/user/sign-in";
 	}
 	

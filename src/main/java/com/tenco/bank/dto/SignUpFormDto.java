@@ -15,9 +15,10 @@ public class SignUpFormDto {
 	private String fullname;
 	private String userimg;
 	private Integer point;
-	private MultipartFile file;
+	private MultipartFile customFile;
 	// --> MultipartFile file 는 name 속성 값 과 동일 해야만 한다!
 	// 파일 처리
-	
+	private String originFileName;
+	private String uploadFileName;
 	
 }

@@ -7,8 +7,8 @@
 		<!-- 반드시 세미콜론을 제거 해야 한다   -->
 	<!-- #{username} 객체에 속성값으로 설정 해야 한다  -->
 	<insert id="insert">
-		insert into user_tb	(username, password, fullname, created_at)
-		values( #{username}, #{password}, #{fullname}, now())
+		insert into user_tb	(username, password, fullname, created_at, origin_file_name, upload_file_name)
+		values( #{username}, #{password}, #{fullname}, now(),#{originFileName},#{uploadFileName})
 	</insert>
 	
 	<update id="updateById">

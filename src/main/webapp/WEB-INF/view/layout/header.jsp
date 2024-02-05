@@ -64,7 +64,16 @@
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
-      <div class="m--profile"></div>
+      <!--로그인 여부에 코드 추가하기 -->
+		<!--       <div class="m--profile"></div> -->
+	<c:choose>	
+	 <c:when test="${principal != null}">
+       <img alt="" src="${principal.setupUserImage()}">
+     </c:when>	
+     <c:otherwise>
+     	<div class="m--profile"></div>
+     </c:otherwise>  
+    </c:choose> 
       <p><span style="font-weight: bold;">Welcome to the Jinny's Bank</span></p>
       <h3>TODO LIST</h3>
       <p>Please select the menu that you want to do.</p>
