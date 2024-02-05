@@ -16,8 +16,7 @@
 		<h2>회원정보수정</h2>
 		<form action="/user/updateUser" method="post" enctype="multipart/form-data">
 			 <div class="form-group">
-			    <label for="username">id</label>
-			    <input type="text" name="id" class="form-control" placeholder="id입력" id="id" value="${principal.id}" readonly>
+			    <input type="hidden" name="id" class="form-control" placeholder="id입력" id="id" value="${principal.id}" readonly>
 			  </div>
 			  <div class="form-group">
 			    <label for="username">유저네임</label>
