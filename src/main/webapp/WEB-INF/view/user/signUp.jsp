@@ -5,7 +5,8 @@
 
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 <!-- main  -->
 
@@ -16,7 +17,11 @@
 		const username = document.getElementById("join-id").value;
 		
 		   if (username.trim() === "") {
-	            alert('사용자이름을 입력하세요!');
+			   Swal.fire({
+			        title: '빈칸입니다!',
+			        icon: 'error',
+			        text: '빈칸입니다! 입력해주세요.',
+			    });	         
 	            return;
 	        }
 		
@@ -29,11 +34,19 @@
 			success: function(data){
 				
 				if(data === "duplicate"){
-					alert('이미존재하는이름입니다!');
+					 Swal.fire({
+					        title: '아이디존재!',
+					        icon: 'error',
+					        text: '중복된아이디입니다! 다른 아이디를 입력해주세요.',
+					    });	     
 				}
 				
 				if(data === "not-duplicate"){
-					alert('사용가능한 이름입니다!');
+					 Swal.fire({
+					        title: '사용사능한아이디!',
+					        icon: 'success',
+					        text: '사용가능한아이디입니다!',
+					   });	     
 				}
 				
 				
