@@ -75,7 +75,7 @@
 			  		<!-- 이벤트 전파속성 -> 버블링? 캡처링? 뭔가용? -->	  
 			   	   <div class="custom-file">
 					  <input type="file" class="custom-file-input" id="customFile" name="customFile"><br>
-					  <label class="custom-file-label" for="customFile">파일선택</label>
+					  <label class="custom-file-label" for="customFile">사진변경</label>
 				   </div>
 			   
 	           <button type="submit" class="btn btn-info">회원가입</button>

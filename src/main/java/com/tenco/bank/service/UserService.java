@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tenco.bank.dto.SignInFormDto;
 import com.tenco.bank.dto.SignUpFormDto;
+import com.tenco.bank.dto.UpdateUserDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 import com.tenco.bank.repository.entity.User;
@@ -160,6 +161,32 @@ public class UserService {
 		
 		return checkID;
 	}
+	
+	
+	//회원정보수정
+	@Transactional
+	public void updateById(UpdateUserDto dto) {
+		
+		User user = User.builder()
+				.id(dto.getId())
+				.username(dto.getUsername())
+				.password(passwordEncoder.encode(dto.getPassword()))
+				.fullname(dto.getFullname())
+				.originFileName(dto.getOriginFileName())
+				.uploadFileName(dto.getUploadFileName())
+				.build();
+		
+			int result = userRepository.updateById(user);
+		
+		
+		if(result != 1) {
+			throw new CustomRestfulException("회원수정실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+
+	}
+	
+	
 	
 	
 	

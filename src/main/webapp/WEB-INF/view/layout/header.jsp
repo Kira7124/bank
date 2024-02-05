@@ -41,6 +41,9 @@
 	    	 <a class="nav-link" href="/user/sign-out">로그아웃</a>
 	      </li>
 	      <li class="nav-item">
+	    	 <a class="nav-link" href="/user/updateUser">회원정보수정</a>
+	      </li>
+	      <li class="nav-item">
 	    	 <a class="nav-link" href="/user/delete-user">회원탈퇴</a>
 	      </li>
 	      <li class="nav-item">

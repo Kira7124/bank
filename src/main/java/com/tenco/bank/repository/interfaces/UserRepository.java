@@ -15,7 +15,7 @@ public interface UserRepository {
 	public int insert(User user);
 	
 	// 회원수정
-	public int updateById(User user);
+	public Integer updateById(User user);
 	
 	// 회원삭제
 	public int deleteById(User user);
