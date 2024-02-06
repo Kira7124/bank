@@ -5,14 +5,21 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tenco.bank.dto.SignInFormDto;
@@ -26,7 +33,9 @@ import com.tenco.bank.utils.Define;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -373,7 +382,45 @@ public class UserController {
 	
 	
 	
-
+	 // http://localhost:80/user/kakao-callback?code="xxxxxxxxxx"
+	 @GetMapping("/kakao-callback")
+	 @ResponseBody // --> 받은 데이터를 반환
+	 public String kakaoCallback(@RequestParam String code) {
+		 System.out.println("code : " + code); 
+		 
+		 
+		//POST 방식 , 헤더구성 , 바디구성
+		RestTemplate rt1 = new RestTemplate();
+		 
+		 //헤더구성
+		HttpHeaders headers1 = new HttpHeaders();
+		headers1.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		//바디구성
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", "889b8927906da3de1056fe5e6264e321");
+		params.add("redirect_uri", "http://localhost/user/kakao-callback");
+		params.add("code", code);
+		
+		
+		//헤더 + 바디 결합
+		HttpEntity<MultiValueMap<String, String>> reqMsg = new HttpEntity<>(params,headers1);
+		ResponseEntity<String> response = 
+				rt1.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, reqMsg, String.class);
+	
+		
+		
+		
+		//DTO 설계하기
+		
+		
+		
+		
+		
+		
+		 return response.getBody();
+	 }
 	
 	
 	
