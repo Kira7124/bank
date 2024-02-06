@@ -46,9 +46,6 @@
 	      <li class="nav-item">
 	    	 <a class="nav-link" href="/user/delete-user">회원탈퇴</a>
 	      </li>
-	      <li class="nav-item">
-	    	 <img src="${principal.setupUserImage()}" class="user-img">
-	      </li>
         </c:when>
         <c:otherwise>
         	<li class="nav-item">

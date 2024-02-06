@@ -151,7 +151,7 @@ public class UserController {
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-
+			
 			// 객체상태변경
 			dto.setOriginFileName(file.getOriginalFilename());
 			dto.setUploadFileName(fileName);

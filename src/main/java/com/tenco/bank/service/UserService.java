@@ -148,7 +148,6 @@ public class UserService {
 	public Integer pointUser(String name) {
 		
 		Integer pointup = userRepository.pointChange(name);
-		
 		return pointup;
 	}
 	
