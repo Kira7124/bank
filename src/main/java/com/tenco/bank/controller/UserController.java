@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tenco.bank.dto.KakaoProfile;
+import com.tenco.bank.dto.OAuthToken;
 import com.tenco.bank.dto.SignInFormDto;
 import com.tenco.bank.dto.SignUpFormDto;
 import com.tenco.bank.dto.UpdateUserDto;
@@ -384,7 +386,6 @@ public class UserController {
 	
 	 // http://localhost:80/user/kakao-callback?code="xxxxxxxxxx"
 	 @GetMapping("/kakao-callback")
-	 @ResponseBody // --> 받은 데이터를 반환
 	 public String kakaoCallback(@RequestParam String code) {
 		 System.out.println("code : " + code); 
 		 
@@ -406,20 +407,58 @@ public class UserController {
 		
 		//헤더 + 바디 결합
 		HttpEntity<MultiValueMap<String, String>> reqMsg = new HttpEntity<>(params,headers1);
-		ResponseEntity<String> response = 
-				rt1.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, reqMsg, String.class);
+		ResponseEntity<OAuthToken> response = 
+				rt1.exchange("https://kauth.kakao.com/oauth/token", HttpMethod.POST, reqMsg, OAuthToken.class);
 	
 		
+		//DTO 설계하기 --> 작성완 --> 간단작성해주는 웹 사이트 활용
+		
+	
+		//다시요청 -- 인증토큰 -- 사용자정보요청
+		RestTemplate rt2 = new RestTemplate();
+		
+		//헤더2
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.add("Authorization", "Bearer " + response.getBody().getAccessToken());
+		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		//바디2 --> 여기서는 필수값이 아님 ( 넣어도 되긴 함! )
 		
 		
-		//DTO 설계하기
+		//결합
+		HttpEntity<MultiValueMap<String, String>> kakaoInfo = new HttpEntity<>(headers2);
+		ResponseEntity<KakaoProfile> response2 = 
+				rt2.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.POST, kakaoInfo, KakaoProfile.class);
+		System.out.println(response2.getBody());
+
+		
+		KakaoProfile kakaoProfile = response2.getBody();
 		
 		
+		// 로그인처리
+		// 단 , 최초 요청 사용자라면 , 회원가입 후 로그인처리
+		// 우리사이트 --> 카카오
+		SignUpFormDto dto = SignUpFormDto.builder()
+				.username("OAuth_" + kakaoProfile.getProperties().getNickname())
+				.fullname("Kakao")
+				.password("asd1234")
+				.build();
+		
+		User oldUser = userService.readUserByUserName(dto.getUsername());
+		// null <--- 최초로그인시에
+		if(oldUser == null) {
+			userService.createUser(dto);
+			oldUser = new User();
+			oldUser.setUsername(dto.getUsername());
+			oldUser.setFullname(dto.getFullname());
+		}
+		
+		oldUser.setPassword(null);
+		// 로그인처리
+		httpSession.setAttribute(Define.PRINCIPAL, oldUser);
 		
 		
-		
-		
-		 return response.getBody();
+		return "redirect:/account/list";
 	 }
 	
 	

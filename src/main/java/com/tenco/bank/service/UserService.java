@@ -187,7 +187,10 @@ public class UserService {
 	}
 	
 	
-	
+	//사용자이름만으로 정보조회
+	public User readUserByUserName(String username) {
+		return userRepository.findByUsername2(username);
+	}
 	
 	
 	
