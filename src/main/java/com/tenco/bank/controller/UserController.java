@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +35,9 @@ import com.tenco.bank.service.UserService;
 import com.tenco.bank.utils.Define;
 
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
@@ -176,9 +180,10 @@ public class UserController {
 	
 	
 	@GetMapping("/sign-in")
-	public String signInpage(HttpServletRequest request) {
+	public String signInpage(HttpServletRequest request ,@CookieValue(value ="rememberedId", required = false) String rememberedId, Model model) {
 		HttpSession session = request.getSession();
 		session.invalidate();
+		model.addAttribute("rememberedId", rememberedId);
 		return "user/signIn";
 		
 	}
@@ -194,7 +199,8 @@ public class UserController {
 	
 	
 	@PostMapping("/sign-in")
-	public String signInProc(SignInFormDto dto) {
+	public String signInProc(SignInFormDto dto,@RequestParam(value = "remember", required = false) String remember,
+			HttpServletResponse response) throws Exception{
 		System.out.println("111111111111111111111");
 		// 1. 인증검사 -> 유효성검사
 		if(dto.getUsername() == null || dto.getUsername().isEmpty()) {
@@ -203,6 +209,14 @@ public class UserController {
 		
 		if(dto.getPassword() == null || dto.getPassword().isEmpty()) {
 			throw new CustomRestfulException("password을 입력하세요!", HttpStatus.BAD_REQUEST);
+		}
+		
+
+		if (remember != null && remember.equals("chk")) {
+			// 쿠키 7 일간 보존
+			Cookie cookie = new Cookie("rememberedId", dto.getUsername());
+			cookie.setMaxAge(604800);
+			response.addCookie(cookie);
 		}
 		
 		

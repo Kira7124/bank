@@ -20,7 +20,7 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="pwd">비밀번호</label>
-			    <input type="password" name="password" class="form-control" placeholder="등록된PW입력" id="pwd" value="12345678">
+			    <input type="password" name="password" class="form-control" placeholder="등록된PW입력" id="pwd" >
 			  </div>
            <button type="submit" class="btn btn-info">로그인</button>
            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=889b8927906da3de1056fe5e6264e321&redirect_uri=http://localhost/user/kakao-callback">
