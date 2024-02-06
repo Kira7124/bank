@@ -23,12 +23,15 @@
 	    <c:choose>
 	      <c:when test="${principal.point >= 100}">
 	    	등급 : <span style="color:gold; font-weight: bold;">골드</span>
+	    	<img src="${pageContext.request.contextPath}/resources/img/gold.png">
 	      </c:when>
 	      <c:when test="${principal.point >= 50}">
 	    	등급 : <span style="color:#dcdcdc; font-weight: bold;">실버</span>
+	    	<img src="${pageContext.request.contextPath}/resources/img/silver.png">
 	      </c:when>
 	 	  <c:otherwise>
 	 		 등급 : <span style="color:#a52a2a; font-weight: bold;">브론즈</span>
+	 		 <img src="${pageContext.request.contextPath}/resources/img/bronze.png">
 	 	  </c:otherwise> 
 	    </c:choose>
 	    
