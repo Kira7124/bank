@@ -26,6 +26,9 @@
            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=889b8927906da3de1056fe5e6264e321&redirect_uri=http://localhost/user/kakao-callback">
            		<img alt="" src="/images/kakao_login_small.png" width="75" height="38">
            </a>
+           <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pQI29Lp8O0g3rZjanerD&state=test&redirect_uri=http://localhost/user/naver-callback">
+           		<img alt="" src="/images/btnG_short.png" width="75" height="38">
+           </a>
          </form>
 	  </div>
 	</br>

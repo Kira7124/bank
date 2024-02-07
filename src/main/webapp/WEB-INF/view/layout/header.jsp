@@ -21,17 +21,6 @@
 </head>
 <body>
 
-<style>
-	.banner--img{
-		background-size: cover;
-		background-position: center;
-		width: 100%;
-		height: 100%;
-		
-	}
-
-</style>
-
 
 <div class="jumbotron text-center banner--img" id="banner" style="margin-bottom:0">
   <h1 style="color:white;">JinnyBank</h1>
@@ -115,23 +104,22 @@
     
     
 
-<script>
-    var images = ["/images/coin.jpg", "/images/money.jpg", "/images/bussiness.jpg"];
-    var currentIndex = 0;
-    var banner = document.getElementById('banner');
-
-    function changeBackground() {
-        currentIndex = (currentIndex + 1) % images.length;
-        banner.style.backgroundImage = "url('" + images[currentIndex] + "')";
-    }
-
-    // Initial call
-    changeBackground();
-
-    // Change background every 5 seconds
-    setInterval(changeBackground, 1000);
-</script>
+	<script>
+	     var images = ["/images/coin.jpg", "/images/money.jpg", "/images/bussiness.jpg"];
+	     var currentIndex = 0;
+	     var banner = document.getElementById('banner');
+	
+	     function changeBackground() {
+	         currentIndex = (currentIndex + 1) % images.length;
+	         banner.style.backgroundImage = "url('" + images[currentIndex] + "')";
+	     }
+		
+	     changeBackground();
+	    
+	 	//백그라운드 이미지 꾸는 시간간격 (1000 -> 1초)
+	     setInterval(changeBackground, 3000);
+	</script>
     
     
     
-    <!-- end of header   -->
+<!-- end of header   -->

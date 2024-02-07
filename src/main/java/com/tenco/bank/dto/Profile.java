@@ -1,4 +1,4 @@
-package com.tenco.bank.dto;
+ package com.tenco.bank.dto;
 
 
 import lombok.Data;
