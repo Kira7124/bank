@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tenco.bank.dto.ResponseDto;
@@ -21,19 +22,19 @@ import com.tenco.bank.dto.ResponseDto;
 @RestController
 public class JavaMailTestController {
 
-    // ("/auth/send") Path를 통해 실습해봤다.
-	
+   
+	//실습용 메일주소 설계
 	// http://localhost:80/auth/send
 	
     @GetMapping("/auth/send")
-    public ResponseDto<Integer> mailSend(){
-        return new ResponseDto<>(HttpStatus.OK.value(), naverMailSend());
+    public ResponseDto<Integer> mailSend(@RequestParam("email") String email){
+        return new ResponseDto<>(HttpStatus.OK.value(), naverMailSend(email));
     }
 
-    public static int naverMailSend(){
+    public static int naverMailSend(String recipientEmail){
         String host = "smtp.naver.com";
         String user = "afc2015@naver.com";
-        String password = "비번입력";
+        String password = "";
 
         // SMTP 서버 정보를 설정한다.
         Properties props = new Properties(); // Properties는 java.util의 Properties입니다.
@@ -53,13 +54,13 @@ public class JavaMailTestController {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             // 수신자 이메일
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("afc2015@naver.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
 
             // 메일 제목
             message.setSubject("테스트메일");
 
             // 메일 내용
-            message.setText("테스트용 메일입니다 Kira군 ❤❤");
+            message.setText("테스트용 메일입니다 Kira군");
 
             // send the message
             Transport.send(message);
