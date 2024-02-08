@@ -87,13 +87,6 @@
 					  <input type="file" class="custom-file-input" id="customFile" name="customFile"><br>
 					  <label class="custom-file-label" for="customFile">사진변경</label>
 				   </div>
-			    <div class="form-group">
-		            <form action="/auth/send" method="get">
-		                <label for="email">이메일 주소</label>
-		                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요" required>
-		                <button type="submit" class="btn btn-primary mt-2">이메일로 인증 메일 받기</button>
-		            </form>
-        		</div>
 	           <button type="submit" class="btn btn-info">회원가입</button>
 	         </form>
 		  </div>

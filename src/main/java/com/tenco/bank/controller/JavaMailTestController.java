@@ -27,11 +27,11 @@ public class JavaMailTestController {
 	// http://localhost:80/auth/send
 	
     @GetMapping("/auth/send")
-    public ResponseDto<Integer> mailSend(@RequestParam("email") String email){
-        return new ResponseDto<>(HttpStatus.OK.value(), naverMailSend(email));
+    public ResponseDto<Integer> mailSend(){
+        return new ResponseDto<>(HttpStatus.OK.value(), naverMailSend());
     }
 
-    public static int naverMailSend(String recipientEmail){
+    public static int naverMailSend(){
         String host = "smtp.naver.com";
         String user = "afc2015@naver.com";
         String password = "";
@@ -54,7 +54,7 @@ public class JavaMailTestController {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             // 수신자 이메일
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("afc2015@naver.com"));
 
             // 메일 제목
             message.setSubject("테스트메일");
