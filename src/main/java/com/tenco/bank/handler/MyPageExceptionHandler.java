@@ -7,13 +7,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tenco.bank.handler.exception.CustomPageException;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * View 랜더링을 위해 , ModelView 객체를 반환하도록 설정 되어 있음.
  * 예외처리 Page 를 리턴할 때 사용한다.
  */
 
-
+@Slf4j
 @ControllerAdvice
 public class MyPageExceptionHandler {
 	
@@ -22,7 +24,9 @@ public class MyPageExceptionHandler {
 	
 	@ExceptionHandler(CustomPageException.class)
 	public ModelAndView handlerRuntionException(CustomPageException e) {
-		System.out.println("여기 에러 확인 ~~~~~~~~");
+		
+		log.debug("에러확인!!!!!!!!!!!!!!!!!!");
+		//System.out.println("여기 에러 확인 ~~~~~~~~");
 		ModelAndView modelAndView = new ModelAndView("errorPage");
 		modelAndView.addObject("statusCode", HttpStatus.NOT_FOUND.value());
 		modelAndView.addObject("message",e.getMessage());

@@ -72,6 +72,8 @@ public class UserController {
 	
 	@GetMapping("/sign-up")
 	public String signUpPage() {
+		log.debug("회원가입 페이지시작");
+		log.info("회페 시작입니다!");
 		return "user/signUp";
 	}
 	
@@ -180,6 +182,7 @@ public class UserController {
 	
 	@GetMapping("/sign-in")
 	public String signInpage(HttpServletRequest request ,@CookieValue(value ="rememberedId", required = false) String rememberedId, Model model) {
+		log.debug("로그인페이지 시작!");
 		HttpSession session = request.getSession();
 		session.invalidate();
 		model.addAttribute("rememberedId", rememberedId);
@@ -200,7 +203,7 @@ public class UserController {
 	@PostMapping("/sign-in")
 	public String signInProc(SignInFormDto dto,@RequestParam(value = "remember", required = false) String remember,
 			HttpServletResponse response) throws Exception{
-		System.out.println("111111111111111111111");
+
 		// 1. 인증검사 -> 유효성검사
 		if(dto.getUsername() == null || dto.getUsername().isEmpty()) {
 			throw new CustomRestfulException("username을 입력하세요!", HttpStatus.BAD_REQUEST);
@@ -223,7 +226,6 @@ public class UserController {
 		// 서비스 호출 예정....
 		User user =	userService.readUser(dto);
 		userService.pointUser(dto.getUsername());
-		System.out.println("22222222222222222222222222");
 		httpSession.setAttribute(Define.PRINCIPAL, user);
 		// Define.PRINCIPAL --> 이안에 "principal" 이 되어있어서 user 객체가 "principal" 안에 담겨있는것이랑 동일!
 		httpSession.setAttribute("name", user.getUsername());
@@ -236,6 +238,7 @@ public class UserController {
 	//로그아웃
 	@GetMapping("/sign-out")
 	public String userlogout(HttpServletRequest request) {
+		log.debug("로그아웃처리완");
 		HttpSession session = request.getSession();
 		session.invalidate();
 		return "redirect:/user/sign-in";
@@ -246,6 +249,7 @@ public class UserController {
 	//회원삭제 GET
 	@GetMapping("/delete-user")
 	public String userDeleteget() {
+		log.debug("회원삭제페이지실행");
 		return "user/delete";
 	}
 	
@@ -288,6 +292,7 @@ public class UserController {
 	//마이페이지 GET
 	@GetMapping("/detail-user")
 	public String memberDetail(SignUpFormDto dto,Model model) {
+		log.debug("마이페이지실행");
 		User Userdetail = userService.detailUser(dto);
 		model.addAttribute("userdetail", Userdetail);
 		return "user/detail";
@@ -301,6 +306,7 @@ public class UserController {
 	@GetMapping("/checkID")
 	@ResponseBody
 	public String checkIDGet(@RequestParam("username") String username) {
+		log.debug("중복체크실행중....");
 		Integer result = userService.checkID(username);
 		
 		if(result == 1) {
@@ -320,6 +326,7 @@ public class UserController {
 	 // 회원정보수정 GET
 	 @GetMapping("/updateUser")
 	 public String updateUserGET() {
+		 log.debug("정보수정페이지실행");
 		 return "user/update";
 	 }
 	
@@ -400,7 +407,8 @@ public class UserController {
 	 // http://localhost:80/user/kakao-callback?code="xxxxxxxxxx"
 	 @GetMapping("/kakao-callback")
 	 public String kakaoCallback(@RequestParam String code) {
-		 System.out.println("code : " + code); 
+		 log.debug("code :" + code);
+		// System.out.println("code : " + code); 
 		 
 		 
 		//POST 방식 , 헤더구성 , 바디구성

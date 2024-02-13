@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.handler.exception.UnAuthorizedException;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Order(1)
 @RestControllerAdvice
 public class MyRestfulExceptionHandler {
@@ -15,10 +18,15 @@ public class MyRestfulExceptionHandler {
 	// 모든 예외 클래스 설정
 	@ExceptionHandler(Exception.class)
 	public void exception(Exception e) {
-		System.out.println("---------------------------");
-		System.out.println(e.getClass().getName());
-		System.out.println(e.getMessage());
-		System.out.println("---------------------------");
+		log.debug("-------------------------------------");
+		//System.out.println("---------------------------");
+		log.debug(e.getClass().getName());
+		log.debug(e.getMessage());
+		//System.out.println(e.getClass().getName());
+		//System.out.println(e.getMessage());
+		//System.out.println("---------------------------");
+		log.debug("-------------------------------------");
+
 
 		
 	}

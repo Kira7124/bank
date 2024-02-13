@@ -21,8 +21,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.tenco.bank.dto.Todo;
 
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @RestController
 public class RestControllerTest {
 	
@@ -73,7 +75,10 @@ public class RestControllerTest {
 			
 			
 			// http://localhost:80/my-test1
-			System.out.println("headers " + response.getHeaders());
+			
+			log.debug("headers : " +  response.getHeaders()); 
+			
+			//System.out.println("headers " + response.getHeaders());
 			return ResponseEntity.status(HttpStatus.OK).body(response.getBody());
 			
 			

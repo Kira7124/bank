@@ -30,11 +30,12 @@ import com.tenco.bank.utils.Define;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 
 
 
-
+@Slf4j
 @Controller // 데이터 를 (만) 반환하고싶으면 -> @RestController 달아주기
 @RequestMapping("/account")
 public class AccountController {
@@ -361,7 +362,9 @@ public class AccountController {
 		Account account = accountService.detailAccount(id);
 		List<CustomHistory> historylist =  accountService.readHistoryListByAccount(type,id);
 		
-		System.out.println("list :" + historylist.toString());
+		
+		log.debug("list : " + historylist.toString());
+		//System.out.println("list :" + historylist.toString());
 		
 		model.addAttribute("account", account);
 		model.addAttribute("historyList", historylist);

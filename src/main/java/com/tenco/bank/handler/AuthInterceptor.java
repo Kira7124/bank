@@ -12,11 +12,12 @@ import com.tenco.bank.utils.Define;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 // 1. HandlerInterceptor 구현하기
 // AuthInterceptor --> new -->
 
-
+@Slf4j
 @Component // IoC 대상
 public class AuthInterceptor implements HandlerInterceptor {
 	
@@ -27,7 +28,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		System.out.println("인터셉터 동작확인 - 111111111111111111111111111111111111");
+		
+		log.debug("인터셉터 동작확인!-111111111111111111111111111111");
+		
+		//System.out.println("인터셉터 동작확인 - 111111111111111111111111111111111111");
 		// 인증검사
 		 HttpSession session = request.getSession();
 		 User principal	= (User)session.getAttribute(Define.PRINCIPAL);
